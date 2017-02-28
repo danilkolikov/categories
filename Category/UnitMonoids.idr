@@ -1,12 +1,16 @@
 module UnitMonoids
 
 import public Category.UnitMonoid
-import public Algebra.Monoids
+import public Algebra.Hierarchy
+import public Setoid.Natural
+
+import Utils
 
 %access public export
 
-natPlusMonoidCat : Category () (UnitArrow Nat) (UnitEqual NatEq)
-natPlusMonoidCat = monoid natPlusMonoid
+naturalPlusMonoidCat : Category
+naturalPlusMonoidCat =
+    naturalIsSemiring & semiringIsCommutativeMonoidOverPlus >>> commutativeMonoidIsMonoid >>> monoidIsCategory
 
-natMultMonoidCat : Category () (UnitArrow Nat) (UnitEqual NatEq)
-natMultMonoidCat = monoid natMultMonoid
+naturalMultMonoidCat : Category
+naturalMultMonoidCat = naturalIsSemiring & semiringIsMonoidOverMult >>> monoidIsCategory

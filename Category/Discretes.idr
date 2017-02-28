@@ -1,14 +1,12 @@
 module Discretes
 
 import public Category.Discrete
+import Relation.Equalities
 
 %access public export
 
-discreteCat : Category a (=) ArrowEquality
-discreteCat = discrete equalIsEquality
+one : Category
+one = discreteCategory ()
 
-one : Category () (=) ArrowEquality
-one = discrete equalIsEquality
-
-two : Category Bool (=) ArrowEquality
-two = discrete equalIsEquality
+two : Category
+two = discreteCategory Bool

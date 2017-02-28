@@ -1,16 +1,16 @@
 module Discrete
 
-import public Category
 import public Relation
-import public Relation.Equalities
+import public Relation.Hierarchy
+import public Category
+import public Category.Order
 
-%access export
+import Utils
 
-discrete : Equality a eq -> Category a eq ArrowEquality
-discrete (MkEquality (MkReflexive refl) (MkSymmetric symm) (MkTransittive transit)) = MkCategory
-    arrowEqualityIsEquality
-    transit
-    (\_, _, _, _, _, _, _ => ArrowRefl)
-    refl
-    (\_, _, _ => ArrowRefl)
-    (\_, _, _ => ArrowRefl)
+%access public export
+
+equalityIsCategory : {a: Type} -> {eq: a -> a -> Type} -> IsEquality a eq -> Category
+equalityIsCategory =  equalityIsPreOrder >>> preOrderIsCategory
+
+discreteCategory : (a: Type) -> Category
+discreteCategory a = equalIsEquality {a=a} & equalityIsCategory

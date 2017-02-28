@@ -2,15 +2,16 @@ package categories
 
 modules
         Algebra,
-            Algebra.SemiGroups,
-            Algebra.Monoids,
-            Algebra.Abelians,
-            Algebra.SemiRings
+            Algebra.Hierarchy
         Relation,
             Relation.Equalities,
+            Relation.Hierarchy,
+        Setoid,
+            Setoid.Natural,
         Category,
             Category.Discrete, Category.Discretes,
             Category.Order,
-            Category.UnitMonoid, Category.UnitMonoids
+            Category.UnitMonoid, Category.UnitMonoids,
         Functor,
-            Functor.Identity, Functor.Identities
+            Functor.Identity, Functor.Identities,
+        Utils

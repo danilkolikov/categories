@@ -4,24 +4,28 @@ import public Relation
 
 %access public export
 
-record Category a (arr : a -> a -> Type) (arrEq : (x, y: a) -> arr x y -> arr x y -> Type) where
+record Category where
     constructor MkCategory
-    isEquality : (x, y: a) -> Equality (arr x y) (arrEq x y)
+    Object : Type
+    Arrow : Object -> Object -> Type
+    ArrowEq : (x, y: Object) -> (f, g: Arrow x y) -> Type
 
-    compose : (x, y, z: a) -> (x `arr` y) -> (y `arr` z) -> (x `arr` z)
+    isEquality : (x, y: Object) -> IsEquality (Arrow x y) (ArrowEq x y)
+
+    compose : (x, y, z: Object) -> (Arrow x y) -> (Arrow y z) -> (Arrow x z)
     assoc :
-        (x, y, z, w: a) ->
-        (f : x `arr` y) -> (g : y `arr` z) -> (h : z `arr` w) ->
-        arrEq x w
+        (x, y, z, w: Object) ->
+        (f : Arrow x y) -> (g : Arrow y z) -> (h : Arrow z w) ->
+        ArrowEq x w
                 (compose x y w f (compose y z w g h))
                 (compose x z w (compose x y z f g) h)
 
-    idArr : (x: a) -> x `arr` x
-    leftId : (x, y : a) -> (f : x `arr` y) -> arrEq x y (compose x x y (idArr x) f) f
-    rightId : (x, y : a) -> (f : x `arr` y) -> arrEq x y(compose x y y f (idArr y)) f
+    idArr : (x: Object) -> Arrow x x
+    leftId : (x, y : Object) -> (f : Arrow x y) -> ArrowEq x y (compose x x y (idArr x) f) f
+    rightId : (x, y : Object) -> (f : Arrow x y) -> ArrowEq x y(compose x y y f (idArr y)) f
 
-dom : Category a arr arrEq -> (x `arr` y) -> a
+dom : (C: Category) -> {x, y: Object C} -> Arrow C x y -> Object C
 dom _ {x} _ = x
 
-cod : Category a arr arrEq -> (x `arr` y) -> a
+cod : (C: Category) -> {x, y: Object C} -> Arrow C x y -> Object C
 cod _ {y} _ = y

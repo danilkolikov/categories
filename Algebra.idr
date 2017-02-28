@@ -1,49 +1,64 @@
 module Algebra
 
-import Relation
+import public Setoid
+import public Operation
 
 %access public export
 
-record SemiGroup a (op: a -> a -> a) (eq : a -> a -> Type) where
-    constructor MkSemiGroup
-    getEquality : Equality a eq
+-- Semigroup is already defined
+record Semigroup' where
+    constructor MkSemigroup'
+    setoid : Setoid
+    op: Carrier setoid -> Carrier setoid -> Carrier setoid
+    isAssociative : IsAssociative setoid op
 
-    assoc : (x, y, z : a) -> (op x (op y z)) `eq` (op (op x y) z)
+-- Monoid is already defined
+record Monoid' where
+    constructor MkMonoid'
+    setoid : Setoid
+    op: Carrier setoid -> Carrier setoid -> Carrier setoid
+    isAssociative : IsAssociative setoid op
+    hasNeutral : HasNeutral setoid op
 
-||| RecordMonoid (Monoid already exists)
-record RMonoid a (op : a -> a -> a) (eq : a -> a -> Type) where
-    constructor MkRMonoid
-    getSemiGroup : SemiGroup a op eq
+record CommutativeMonoid where
+    constructor MkCommutativeMonoid
+    setoid : Setoid
+    op: Carrier setoid -> Carrier setoid -> Carrier setoid
 
-    getNeutral : a
-    leftNeutral : (x : a) -> (getNeutral `op` x) `eq` x
-    rightNeutral : (x: a) -> (x `op` getNeutral) `eq` x
+    isAssociative : IsAssociative setoid op
+    hasNeutral : HasNeutral setoid op
+    isCommutative : IsCommutative setoid op
 
-record Group a (op : a -> a -> a) (eq : a -> a -> Type) where
+record Group where
     constructor MkGroup
-    getRMonoid : RMonoid a op eq
+    setoid : Setoid
+    op: Carrier setoid -> Carrier setoid -> Carrier setoid
 
-    inverse : a -> a
-    leftInverse : (x : a) -> ((inverse x) `op` x) `eq` (getNeutral getRMonoid)
-    rightInverse : (x : a) -> (x `op` (inverse x)) `eq` (getNeutral getRMonoid)
+    isAssociative : IsAssociative setoid op
+    hasNeutral : HasNeutral setoid op
+    hasInverse : HasInverse setoid op hasNeutral
 
-record Abelian a (op : a -> a -> a) (eq : a -> a -> Type) where
-    constructor MkAbelian
-    getEquality : Equality a eq
-
-    commut : (x, y: a) -> (x `op` y) `eq` (y `op` x)
-
-record AbelianGroup a (op: a -> a -> a) (eq : a -> a -> Type) where
+record AbelianGroup where
     constructor MkAbelianGroup
+    setoid : Setoid
+    op: Carrier setoid -> Carrier setoid -> Carrier setoid
 
-    getAbelian : Abelian a op eq
-    getGroup : Group a op eq
+    isAssociative : IsAssociative setoid op
+    hasNeutral : HasNeutral setoid op
+    hasInverse : HasInverse setoid op hasNeutral
+    isCommutative : IsCommutative setoid op
 
-record SemiRing a (plus : a -> a -> a) (mult : a -> a -> a) (eq : a -> a -> Type) where
-    constructor MkSemiRing
-    getPlusMonoid : RMonoid a plus eq
-    getAbelian : Abelian a plus eq
-    getMultMonoid : RMonoid a mult eq
+record Semiring where
+    constructor MkSemiring
+    setoid : Setoid
+    plus: Carrier setoid -> Carrier setoid -> Carrier setoid
+    mult: Carrier setoid -> Carrier setoid -> Carrier setoid
 
-    distributeLeft : (x, y, z: a) -> ((x `plus` y) `mult` z) `eq` ((x `mult` z) `plus` (y `mult` z))
-    distributeRight : (x, y, z: a) -> (x `mult` (y `plus` z)) `eq` ((x `mult` y) `plus` (x `mult` z))
+    plusIsAssociative : IsAssociative setoid plus
+    plusHasNeutral : HasNeutral setoid plus
+    plusIsCommutative : IsCommutative setoid plus
+
+    multIsAssociative : IsAssociative setoid mult
+    multHasNeutral : HasNeutral setoid mult
+
+    isDistributive : IsDistributive setoid plus mult
