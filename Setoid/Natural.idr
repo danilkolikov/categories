@@ -11,15 +11,15 @@ public export data NatEqual : Nat -> Nat -> Type where
     NatRefl : {x : Nat} -> {y : Nat} -> (x = y) -> NatEqual x y
 
 ||| Proof that custom equalty for natural numbers is equality
-natEqIsEquality : IsEquality Nat NatEqual
-natEqIsEquality = MkIsEquality
+natEqualIsEquality : IsEquality Nat NatEqual
+natEqualIsEquality = MkIsEquality
     (MkIsReflexive $ \_ => NatRefl Refl)
     (MkIsSymmetric $ \_, _, (NatRefl left) => NatRefl $ sym left)
     (MkIsTransittive $ \_, _, _, (NatRefl left), (NatRefl center) => NatRefl $ trans left center)
 
 ||| Setoid for natural numbers (Example of usage of custom equality)
 Natural : Setoid
-Natural = MkSetoid Nat NatEqual natEqIsEquality
+Natural = MkSetoid Nat NatEqual natEqualIsEquality
 
 --- Plus part ---
 

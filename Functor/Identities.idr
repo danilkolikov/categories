@@ -5,5 +5,5 @@ import public Category.Discretes
 
 %access public export
 
-identityOne : CoFunctor one one
-identityOne = identity one
+identityOne : CoFunctor Discretes.one Discretes.one
+identityOne = identity Discretes.one

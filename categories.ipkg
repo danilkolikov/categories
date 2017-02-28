@@ -1,13 +1,18 @@
 package categories
 
-modules
+brief = "Attempt to formalize Category Theory and Algebra using Idris"
+author = "Danil Kolikov"
+homepage = "https://github.com/danilkolikov/categories"
+version = 0.01
+
+modules =
         Algebra,
-            Algebra.Hierarchy
+            Algebra.Hierarchy,
         Relation,
             Relation.Equalities,
             Relation.Hierarchy,
         Setoid,
-            Setoid.Natural,
+            Setoid.Natural, Setoid.BuiltIn,
         Category,
             Category.Discrete, Category.Discretes,
             Category.Order,
