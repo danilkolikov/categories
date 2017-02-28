@@ -6,17 +6,14 @@ import public Relation
 
 %access public export
 
-identity : Category a arr arrEq -> CoFunctor a arr arrEq a arr arrEq
-identity cat with (cat)
-    | (MkCategory eq _ _ _ _ _) = MkCoFunctor
-        cat
-        cat
+identity : (C: Category)  -> CoFunctor C C
+identity (MkCategory _ _ _ eq compose _ idArr _ _) = MkCoFunctor
         id
         (\_, _ => id)
         (\x => let
-                    (MkEquality (MkReflexive refl) _ _) = eq x x
-                in refl (idArr cat x))
+                    (MkIsEquality (MkIsReflexive refl) _ _) = eq x x
+                in refl (idArr x))
         (\x, y, z, f, g =>
             let
-                (MkEquality (MkReflexive refl) _ _) = eq x z
-            in refl (compose cat x y z f g))
+                (MkIsEquality (MkIsReflexive refl) _ _) = eq x z
+            in refl (compose x y z f g))

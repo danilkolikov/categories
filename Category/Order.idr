@@ -4,8 +4,13 @@ import public Category
 import public Relation
 import public Relation.Equalities
 
-preorder : PreOrder a rel -> Category a rel ArrowEquality
-preorder (MkPreOrder (MkReflexive refl) (MkTransittive transit))= MkCategory
+%access public export
+
+preOrderIsCategory : {a: Type} -> {rel: a -> a -> Type} -> IsPreOrder a rel -> Category
+preOrderIsCategory (MkIsPreOrder (MkIsReflexive refl) (MkIsTransittive transit)) = MkCategory
+    a
+    rel
+    ArrowEquality
     arrowEqualityIsEquality
     transit
     (\_,_,_,_,_,_,_ => ArrowRefl)
