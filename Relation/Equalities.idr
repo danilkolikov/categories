@@ -4,13 +4,6 @@ import public Relation
 
 %access public export
 
-||| Proof that built-in equality is equality
-equalIsEquality : {a: Type} -> IsEquality a (=)
-equalIsEquality = MkIsEquality
-    (MkIsReflexive $ \_ => Refl)
-    (MkIsSymmetric $ \_, _ => sym)
-    (MkIsTransittive $ \_, _, _ => trans)
-
 ||| Default equality for arrows. Arrows are equal if their types are equal
 data ArrowEquality : {a: Type} -> {arr: a -> a -> Type} -> (x, y: a) -> (f, g: x `arr` y) -> Type where
     ArrowRefl : {a: Type} -> {arr: a -> a -> Type} -> {x, y: a} -> {f, g: x `arr` y} -> ArrowEquality x y f g
