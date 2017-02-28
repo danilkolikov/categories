@@ -5,10 +5,10 @@ module Utils
 infixr 1 >>>
 infixr 1 &
 
-||| Inverse composition function
+||| Inverse function composition
 (>>>) : {a, b, c: Type} -> (a -> b) -> (b -> c) -> (a -> c)
 f >>> g = g . f
 
-||| Invers function application
+||| Inverse function application
 (&) : {a, b: Type} -> a -> (a -> b) -> b
 x & f = f x
