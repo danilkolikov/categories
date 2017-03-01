@@ -4,8 +4,9 @@ import public Relation
 import public Relation.Hierarchy
 import public Category
 import public Category.Order
+import Setoid.BuiltIn
 
-import Utils
+import Util.Operators
 
 %access public export
 
