@@ -4,9 +4,10 @@ Attempt to formalize category theory and algebra using Idris language
 Contains definition of
 
 - Algebraic structures - Semigroup, Monoid, Semiring, ...
-- Setoids - Natural numbers, built-in setoids
+- Setoids - Natural numbers, built-in setoids, extensional functions
 - Properties of relations and operations
-- Category and Functor (Co and Contra -variant)
+- Category - Discrete, Monoids, PreOrder, Setoids
+- Functor (Co- and Contra-variant)
 - Some examples
 
 ## Installation & Usage

@@ -14,11 +14,12 @@ modules =
             Relation.Hierarchy,
         Operation,
         Setoid,
-            Setoid.Natural, Setoid.BuiltIn, Setoid.Arrow,
+            Setoid.Natural, Setoid.BuiltIn, Setoid.Arrow, Setoid.SetoidFunction,
         Category,
             Category.Discrete, Category.Discretes,
             Category.Order,
             Category.UnitMonoid, Category.UnitMonoids,
+            Category.Setoid,
         Functor,
             Functor.Identity, Functor.Identities,
         Util.Operators
