@@ -4,7 +4,7 @@ import public Category.UnitMonoid
 import public Algebra.Hierarchy
 import public Setoid.Natural
 
-import Utils
+import Util.Operators
 
 %access public export
 

@@ -5,6 +5,8 @@ import public Operation
 
 %access public export
 
+%auto_implicits off
+
 -- Semigroup is already defined
 record Semigroup' where
     constructor MkSemigroup'

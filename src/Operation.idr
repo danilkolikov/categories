@@ -3,6 +3,7 @@ module Operation
 import public Setoid
 
 %access public export
+%auto_implicits off
 
 record IsAssociative (s : Setoid) (op : Carrier s -> Carrier s -> Carrier s) where
     constructor MkIsAssociative

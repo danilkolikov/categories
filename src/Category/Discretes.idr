@@ -1,7 +1,6 @@
 module Discretes
 
 import public Category.Discrete
-import Relation.Equalities
 
 %access public export
 

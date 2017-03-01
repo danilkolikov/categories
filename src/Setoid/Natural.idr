@@ -5,6 +5,7 @@ import Algebra
 import Relation
 
 %access public export
+%auto_implicits off
 
 ||| Equivalence relation for natural numbers
 public export data NatEqual : Nat -> Nat -> Type where

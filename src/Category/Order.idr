@@ -2,7 +2,7 @@ module PreOrder
 
 import public Category
 import public Relation
-import public Relation.Equalities
+import public Setoid.Arrow
 
 %access public export
 

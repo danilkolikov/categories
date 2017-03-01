@@ -5,18 +5,20 @@ author = "Danil Kolikov"
 homepage = "https://github.com/danilkolikov/categories"
 version = 0.01
 
+sourcedir = src
+
 modules =
         Algebra,
             Algebra.Hierarchy,
         Relation,
-            Relation.Equalities,
             Relation.Hierarchy,
+        Operation,
         Setoid,
-            Setoid.Natural, Setoid.BuiltIn,
+            Setoid.Natural, Setoid.BuiltIn, Setoid.Arrow,
         Category,
             Category.Discrete, Category.Discretes,
             Category.Order,
             Category.UnitMonoid, Category.UnitMonoids,
         Functor,
             Functor.Identity, Functor.Identities,
-        Utils
+        Util.Operators
